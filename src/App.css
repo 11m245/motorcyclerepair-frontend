@@ -19,7 +19,7 @@ a{
 
 .page{
   padding-inline: 0;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 
@@ -47,7 +47,7 @@ width: 100%;
 } */
 
 .form{
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: grid;
     gap: 1rem;
     margin-inline: auto;
