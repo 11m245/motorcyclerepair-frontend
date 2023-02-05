@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext } from "react";
+import "./App.css";
+import { Home } from "./pages/Home";
 
 function App() {
+  const apiContext = createContext();
+  const serverUrl = "http://localhost:4000";
+  const clientUrl = "http://localhost:3000";
+  const contextObj = { serverApi: serverUrl, clientUrl };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="project-container">
+        <apiContext.Provider value={contextObj}>
+          <Home />
+        </apiContext.Provider>
+      </div>
     </div>
   );
 }
