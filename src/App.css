@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 body{
@@ -39,6 +38,8 @@ a{
 
 .home-image-container>img{
 width: 100%;
+height: 90vh;
+border-radius: 10px;
 }
 
 /* .home-form-container{
