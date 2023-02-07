@@ -10,8 +10,9 @@ import { ChangePasswordForm } from "./components/ChangePassword";
 export const apiContext = createContext();
 
 function App() {
-  const serverUrl = "http://localhost:4000";
+  // const serverUrl = "http://localhost:4000";
   const clientUrl = "http://localhost:3000";
+  const serverUrl = "https://motorcyclerepair-backend.vercel.app";
   const contextObj = { serverApi: serverUrl, clientUrl };
 
   return (
