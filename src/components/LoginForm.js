@@ -1,9 +1,15 @@
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as yup from "yup";
+import { apiContext } from "../App";
 
 function LoginForm(props) {
-  const { form, setForm } = props;
+  const { setForm } = props;
+  const { serverApi } = useContext(apiContext);
+  const navigate = useNavigate();
   const initialValidationSchema = {
     email: yup.string().min(8).email(),
     password: yup.string().min(8),
@@ -12,9 +18,25 @@ function LoginForm(props) {
     useFormik({
       initialValues: { email: "", password: "" },
       validationSchema: yup.object(initialValidationSchema),
-      onSubmit: () => console.log(values),
+      onSubmit: () => login(values),
     });
 
+  const login = async (values) => {
+    const response = await fetch(`${serverApi}/user/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    if (response.status === 200) {
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      toast.success(data.message);
+      data.role === "workshop" ? navigate("/workshop") : navigate("/user");
+    } else {
+      const data = await response.json();
+      toast.error(data.message);
+    }
+  };
   return (
     <>
       <div className="login-form-container">

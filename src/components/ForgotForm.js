@@ -1,9 +1,13 @@
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
+import { useContext } from "react";
+import { toast } from "react-toastify";
 import * as yup from "yup";
+import { apiContext } from "../App";
 
 function ForgotForm(props) {
-  const { form, setForm } = props;
+  const { setForm } = props;
+  const { serverApi } = useContext(apiContext);
   const initialValidationSchema = {
     email: yup.string().min(8).email(),
   };
@@ -11,8 +15,24 @@ function ForgotForm(props) {
     useFormik({
       initialValues: { email: "" },
       validationSchema: yup.object(initialValidationSchema),
-      onSubmit: () => console.log(values),
+      onSubmit: () => sendResetLink(values),
     });
+
+  const sendResetLink = async (values) => {
+    const response = await fetch(`${serverApi}/user/sendResetLink`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
+    if (response.status === 200) {
+      const data = await response.json();
+      toast.success(data.message);
+    } else {
+      const data = await response.json();
+      toast.error(data.message);
+    }
+  };
 
   return (
     <>

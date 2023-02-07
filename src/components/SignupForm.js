@@ -6,10 +6,14 @@ import {
   TextField,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { useContext } from "react";
 import * as yup from "yup";
+import { apiContext } from "../App";
+import { toast } from "react-toastify";
 
 function SignupForm(props) {
-  const { form, setForm } = props;
+  const { serverApi } = useContext(apiContext);
+  const { setForm } = props;
   const initialValidationSchema = {
     role: yup.string().required(),
     name: yup.string().required(),
@@ -39,21 +43,41 @@ function SignupForm(props) {
         pins: "",
       },
       validationSchema: yup.object(initialValidationSchema),
-      onSubmit: () => console.log(values),
+      onSubmit: () => signup(values),
     });
 
+  async function signup(values) {
+    const response = await fetch(`${serverApi}/user/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    console.log("signup response ", response);
+    const data = await response.json();
+    console.log("signup response data", data);
+    data.message ===
+    "User Created, use the Activation link Sent on mail for Activation"
+      ? toast.success(data.message)
+      : toast.error(data.message);
+  }
   return (
     <>
       <div className="signup-form-container">
         <h2 className="text-center title-small">SignupForm</h2>
         <form onSubmit={handleSubmit} className="form signup-form">
-          <p className="text-primary">Select your Role</p>
+          <label className="text-primary">Select your Role</label>
+          {touched.role && errors.role ? (
+            <p className="text-danger">{errors.role}</p>
+          ) : null}
           <RadioGroup
             row
             aria-labelledby="user role radio"
             name="role"
             value={values.role}
             onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.role && Boolean(errors.role)}
+            helperText={touched.role && errors.role ? errors.role : null}
           >
             <FormControlLabel value="user" control={<Radio />} label="User" />
             <FormControlLabel
@@ -62,6 +86,7 @@ function SignupForm(props) {
               label="Workshop"
             />
           </RadioGroup>
+
           <TextField
             id="name"
             type="text"
@@ -111,7 +136,7 @@ function SignupForm(props) {
           <TextField
             id="cpassword"
             label="Confirm Password"
-            type="cpassword"
+            type="password"
             name="cpassword"
             value={values.cpassword}
             onChange={handleChange}
@@ -171,6 +196,7 @@ function SignupForm(props) {
             </button>
           </div>
         </form>
+        {/* <pre>{JSON.stringify(errors)}</pre> */}
       </div>
     </>
   );
