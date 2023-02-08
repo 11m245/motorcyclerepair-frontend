@@ -8,7 +8,7 @@ import { Button, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 function MobileFooter() {
   const navItems = [
-    { name: "New Booking", path: "bookNew", icon: <AddTaskIcon /> },
+    { name: "Book", path: "bookNew", icon: <AddTaskIcon /> },
     { name: "Home", path: "", icon: <HomeIcon /> },
     { name: "Bookings", path: "allBookings", icon: <ListAltIcon /> },
     { name: "Support", path: "support", icon: <SupportAgentIcon /> },

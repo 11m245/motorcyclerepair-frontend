@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 function PcHeader() {
   const { serverApi, isMobile } = useContext(apiContext);
   const [showDropLog, setShowDropLog] = useState(false);
+  const [activeMenu, setActiveMenu] = useState("Home");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const colors = { backgroundColor: "#1975d2", color: "#fff" };
@@ -82,7 +83,16 @@ function PcHeader() {
           {navItems.map((item, index) => {
             return (
               <Link style={{ color: "#fff" }} key={index} to={item.path}>
-                <Button variant="contained">{item.name}</Button>
+                <Button
+                  style={{
+                    outline:
+                      item.name === activeMenu ? "2px solid yellow" : "none",
+                  }}
+                  onClick={() => setActiveMenu(item.name)}
+                  variant="contained"
+                >
+                  {item.name}
+                </Button>
               </Link>
             );
           })}
