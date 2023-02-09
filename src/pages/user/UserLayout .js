@@ -15,12 +15,14 @@ function UserLayout() {
 
   const [allServiceCategories, setAllServiceCategories] = useState([]);
   const [allServices, setAllServices] = useState([]);
+  const [workshops, setWorkshops] = useState([]);
 
   const dataContextObj = {
     allServices,
     setAllServices,
     allServiceCategories,
     setAllServiceCategories,
+    workshops,
   };
   // console.log("data", dataContextObj);
 
@@ -57,9 +59,27 @@ function UserLayout() {
     }
   }
 
+  async function fetchUserPinWorkshops() {
+    const response = await fetch(`${serverApi}/user/pinWorkshop`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        logintoken: localStorage.getItem("token"),
+      },
+    });
+
+    if (response.status === 200) {
+      const data = await response.json();
+      setWorkshops(data.payload);
+    } else {
+      console.log("workshops not fetched");
+    }
+  }
+
   useEffect(() => {
     fetchCategories();
     fetchServices();
+    fetchUserPinWorkshops();
   }, []);
   return (
     <>
@@ -69,7 +89,7 @@ function UserLayout() {
             {isMobile ? <MobileHeader /> : <PcHeader />}
           </header>
           <main className="body page-content-container">
-            {isMobile ? "Mobile" : "PC"}
+            {/* {isMobile ? "Mobile" : "PC"} */}
             <Outlet />
           </main>
           <footer className="footer ">

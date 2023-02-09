@@ -17,7 +17,7 @@ function MobileFooter() {
   return (
     <>
       <div
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", backgroundColor: "#FFF" }}
         className="mobile-footer-menus-container d-flex justify-content-center gap-1 px-2"
       >
         {navItems.map((item, i) => (

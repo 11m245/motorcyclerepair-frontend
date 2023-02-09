@@ -90,7 +90,7 @@ function MobileHeader() {
           </p>
           {showDropLog ? (
             <div
-              style={{ top: "60px", right: "0px" }}
+              style={{ top: "60px", right: "0px", backgroundColor: "#fff" }}
               className="drop-log-out position-absolute drop-down-container"
             >
               <p className="drop-down-item" onClick={logout}>

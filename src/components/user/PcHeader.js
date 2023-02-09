@@ -119,7 +119,7 @@ function PcHeader() {
           </p>
           {showDropLog ? (
             <div
-              style={{ top: "60px", right: "0px" }}
+              style={{ top: "60px", right: "0px", backgroundColor: "#fff" }}
               className="drop-log-out position-absolute drop-down-container"
             >
               {isMobile ? null : (
