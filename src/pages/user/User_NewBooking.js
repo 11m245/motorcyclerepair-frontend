@@ -1,4 +1,5 @@
 import { Button, Rating, TextField } from "@mui/material";
+import { useFormik } from "formik";
 import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { apiContext } from "../../App";
@@ -37,11 +38,15 @@ function UserNewBooking() {
     const [selectedWorkshop, setSelectedWorkshop] = useState("");
     const { serverApi } = useContext(apiContext);
 
-    const placeServiceRequest = async (e) => {
-      // e.preventDefault();
+    const formik = useFormik({
+      initialValues: { vehicleNo: "", vehicleModel: "" },
+      onSubmit: (values) => placeServiceRequest(values),
+    });
+
+    const placeServiceRequest = async (values) => {
       // console.log("book", currentBooking);
       // console.log(e.target.vehicleModel.value);
-      // console.log(e.target.vehicleNo.value);
+      // console.log("value", values);
       const response = await fetch(`${serverApi}/bookings/new`, {
         method: "POST",
         headers: {
@@ -50,8 +55,8 @@ function UserNewBooking() {
         },
         body: JSON.stringify({
           ...currentBooking,
-          vehicleModel: e.target.vehicleModel.value,
-          vehicleNo: e.target.vehicleNo.value,
+          vehicleModel: values.vehicleModel,
+          vehicleNo: values.vehicleNo,
         }),
       });
 
@@ -114,7 +119,7 @@ function UserNewBooking() {
             </div>
             {true ? (
               <form
-                onSubmit={placeServiceRequest}
+                onSubmit={formik.handleSubmit}
                 style={{ maxWidth: "500px" }}
                 className="mx-auto mt-4 d-flex flex-column gap-2"
               >
@@ -123,6 +128,9 @@ function UserNewBooking() {
                   label="Vehicle Reg. No."
                   variant="outlined"
                   name="vehicleNo"
+                  value={formik.values.vehicleNo}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   required
                 />
                 <TextField
@@ -130,6 +138,9 @@ function UserNewBooking() {
                   label="Vehicle Model"
                   variant="outlined"
                   name="vehicleModel"
+                  value={formik.values.vehicleModel}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   required
                 />
                 <Button type="submit" variant="contained">
