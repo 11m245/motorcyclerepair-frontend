@@ -12,7 +12,7 @@ function Home() {
   return (
     <>
       <div className="homepage-container page">
-        <h1 className="text-center title-big">MotorCycle Service App</h1>
+        <h1 className="text-center title-big">Moto Service App</h1>
         <div className="homepage-body">
           <div className="home-image-container" style={{ alignSelf: "center" }}>
             <img src={homeImage.url} alt={homeImage.name} />
