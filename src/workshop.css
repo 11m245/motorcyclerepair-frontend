@@ -39,12 +39,12 @@
        border-radius: 10px;
    }
 
- /* .bookings-container {
+ .workshop-page-container .bookings-container {
              display: grid;
              gap: 10px;
              grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
              justify-content: center;
- } */
+ }
 
 .count-cards-container{
     display: grid;
@@ -52,6 +52,12 @@
     grid-template-columns: repeat(auto-fit,minmax(100px,100px));
     gap: 5px;
     
+}
+.booking-count-card-wrapper{
+    cursor: pointer;
+}
+.booking-count-card-wrapper:hover p {
+font-weight: bold;
 }
 .booking-count{
     font-size: 16px;
@@ -63,3 +69,17 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.statuses-container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+    gap: 5px;
+}
+
+ .workshop-page-container .filtered-bookings-container {
+     display: grid;
+     gap: 10px;
+     grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+     justify-content: center;
+ }
