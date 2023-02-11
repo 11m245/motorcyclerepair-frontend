@@ -79,7 +79,7 @@ function UserNewBooking() {
         ) : (
           <div className="workshop-selection-page">
             <h6>Select a Workshop you prefer</h6>
-            <div className="workshops-container d-flex justify-content-center">
+            <div className="workshops-container ">
               {workshops.map((workshop, i) => {
                 const { mobile, name, email, address, rating = 2 } = workshop;
                 const handleWorkshopClick = () => {

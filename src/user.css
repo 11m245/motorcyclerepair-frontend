@@ -172,11 +172,10 @@ justify-content: center;
 .workshops-container {
     /* width: 100%; */
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 300px));
- 
+    grid-template-columns: repeat(auto-fill, minmax(100px, 300px)); 
     justify-content: center;
     gap: 15px;  
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 .workshop-wrapper{
