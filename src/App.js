@@ -12,13 +12,16 @@ import { UserDashboard } from "./pages/user/User_Dashboard";
 import { UserNewBooking } from "./pages/user/User_NewBooking";
 import { UserAllBookings } from "./pages/user/User_AllBookings";
 import { UserSupport } from "./pages/user/User_Support";
+import { WorkshopLayout } from "./pages/workshop/workshopLayout";
+import { WorkshopAllBookings } from "./pages/workshop/WorkshopAllBookings";
+import { WorkshopDashboard } from "./pages/workshop/WorkshopDashboard";
 export const apiContext = createContext();
 
 function App() {
-  // const serverUrl = "http://localhost:4000";
-  // const clientUrl = "http://localhost:3000";
-  const serverUrl = "https://motorcyclerepair-backend.vercel.app";
-  const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
+  const serverUrl = "http://localhost:4000";
+  const clientUrl = "http://localhost:3000";
+  // const serverUrl = "https://motorcyclerepair-backend.vercel.app";
+  // const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 720 ? true : false
   );
@@ -51,6 +54,15 @@ function App() {
               <Route path="bookNew" element={<UserNewBooking />} />
               <Route path="allBookings" element={<UserAllBookings />} />
               <Route path="support" element={<UserSupport />} />
+              {/* <Route path="profile" element={<UserProfile />} /> */}
+            </Route>
+            <Route path="/workshop" element={<WorkshopLayout />}>
+              <Route index element={<WorkshopDashboard />} />
+              <Route path="" element={<WorkshopDashboard />} />
+
+              <Route path="allBookings" element={<WorkshopAllBookings />} />
+              <Route path="support" element={<UserSupport />} />
+              {/* <Route path="profile" element={<WorkshopProfile />} /> */}
             </Route>
 
             <Route path="*" element={<NotFound />} />

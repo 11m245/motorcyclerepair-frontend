@@ -1,17 +1,26 @@
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
 
 import { useContext, useEffect, useState } from "react";
 
 import { apiContext } from "../../App";
+import { Button } from "@mui/material";
 
-function MobileHeader() {
-  const { serverApi } = useContext(apiContext);
+function PcHeader() {
+  const { serverApi, isMobile } = useContext(apiContext);
   const [showDropLog, setShowDropLog] = useState(false);
+  const [activeMenu, setActiveMenu] = useState("Home");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const colors = { backgroundColor: "#1975d2", color: "#fff" };
+
+  const navItems = [
+    { name: "Bookings", path: "allBookings" },
+    { name: "Support", path: "support" },
+    { name: "Home", path: "" },
+  ];
 
   async function logout() {
     const response = await fetch(`${serverApi}/user/makeLoginTokenExpire`, {
@@ -69,6 +78,25 @@ function MobileHeader() {
           </h6>
         </div>
 
+        <div className="nav-items-container d-flex gap-2">
+          {navItems.map((item, index) => {
+            return (
+              <Link style={{ color: "#fff" }} key={index} to={item.path}>
+                <Button
+                  style={{
+                    outline:
+                      item.name === activeMenu ? "2px solid yellow" : "none",
+                  }}
+                  onClick={() => setActiveMenu(item.name)}
+                  variant="contained"
+                >
+                  {item.name}
+                </Button>
+              </Link>
+            );
+          })}
+        </div>
+
         <div
           className="profile-container d-flex justify-content-center flex-column align-items-center position-relative"
           onClick={() => setShowDropLog(!showDropLog)}
@@ -93,12 +121,14 @@ function MobileHeader() {
               style={{ top: "60px", right: "0px", backgroundColor: "#fff" }}
               className="drop-log-out position-absolute drop-down-container"
             >
-              <p
-                className="drop-down-item"
-                onClick={() => navigate("/user/profile")}
-              >
-                profile
-              </p>
+              {isMobile ? null : (
+                <p
+                  className="drop-down-item"
+                  onClick={() => navigate("/user/profile")}
+                >
+                  profile
+                </p>
+              )}
               <p className="drop-down-item" onClick={logout}>
                 logout
               </p>
@@ -110,4 +140,4 @@ function MobileHeader() {
   );
 }
 
-export { MobileHeader };
+export { PcHeader };

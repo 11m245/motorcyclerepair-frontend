@@ -1,0 +1,65 @@
+.workshop-page-container {
+    width: 100vw;
+    height: 100vh;
+    /* border: 2px solid red; */
+}
+.workshop-page-container .header {
+    width: 100%;
+    height: 60px;
+    /* border: 2px solid blue; */
+}
+.workshop-page-container .footer {
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* border: 2px solid green; */
+}
+
+.workshop-page-container .body {
+    width: 100%;
+    height: calc(100vh - 120px);
+
+    overflow: scroll;
+    scrollbar-width: none;
+    /* border: 2px solid yellow; */
+    /* for firefox */
+}
+
+.workshop-page-container .body::-webkit-scrollbar {
+    display: none;
+    /* for chrome */
+}
+
+/* allbookings */
+
+.workshop-page-container .booking-wrapper {
+       box-shadow: 2px 6px 21px -2px rgba(0, 0, 0, 0.75);
+       border-radius: 10px;
+   }
+
+ /* .bookings-container {
+             display: grid;
+             gap: 10px;
+             grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+             justify-content: center;
+ } */
+
+.count-cards-container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit,minmax(100px,100px));
+    gap: 5px;
+    
+}
+.booking-count{
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.refresh-button-wrapper{
+    display: flex;
+    justify-content: flex-end;
+}

@@ -95,7 +95,7 @@ function MobileHeader() {
             >
               <p
                 className="drop-down-item"
-                onClick={() => navigate("/user/profile")}
+                onClick={() => navigate("/workshop/profile")}
               >
                 profile
               </p>
