@@ -18,18 +18,18 @@
     /* border: 2px solid green; */
 }
 
-.user-page-container .body{
+.body{
     width: 100%;
-    height: calc(100vh - 120px);
-   
-    overflow: scroll;
+    height: calc(100vh - 120px);  
+    overflow: scroll;   
     scrollbar-width: none; 
     /* border: 2px solid yellow; */
+    
     /* for firefox */
 }
 .user-page-container .body::-webkit-scrollbar {
-    display: none;
-    /* for chrome */
+    display: none; /*for chrome */
+  
 }
 
 .drop-down-container{  
@@ -72,7 +72,7 @@ width: 100%;
 display: grid;
 grid-template-columns:  repeat(auto-fit,minmax(60px, 100px)) ;
 gap: 20px;
-overflow: hidden;
+
 justify-content: center;
 /* border: 2px solid red; */
 }
@@ -105,7 +105,7 @@ justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(60px, 100px));
     justify-content: center;
    gap: 25px;
-    overflow: hidden;
+   
 }
 
 .service-wrapper {
@@ -150,11 +150,15 @@ justify-content: center;
 }
 
 .description-input{
-    width: 350px;
+   width: 350px;
 }
 
 /* workshop Selection */
-
+.workshop-selection-page{
+    width: 100%;
+    
+    /* border: 2px solid blue; */
+}
 .workshop-name{
     font-size: 16px;
     font-weight: bold;
@@ -165,17 +169,21 @@ justify-content: center;
     font-weight: bold;
     color: rgb(166, 25, 48);
 }
-
-.workshops-container{
-    width: 100%;
+.workshops-container {
+    /* width: 100%; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
-
+    grid-template-columns: repeat(auto-fill, minmax(100px, 300px));
+ 
+    justify-content: center;
+    gap: 15px;  
+    border: 2px solid red;
 }
+
 .workshop-wrapper{
     padding: 10px;
     border-radius: 10px;
- box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+   
 }
 
 .workshop-wrapper:hover {
@@ -189,8 +197,8 @@ justify-content: center;
 
    /* allbookingspage */
    .booking-wrapper{
-box-shadow: 2px 6px 21px -2px rgba(0, 0, 0, 0.75);
-border-radius: 10px;
+    box-shadow: 2px 6px 21px -2px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
    }
 
    .bookings-container{

@@ -70,10 +70,16 @@ function LoginForm(props) {
             Submit
           </Button>
           <div className="add-menus d-flex justify-content-between">
-            <button className="text-danger" onClick={() => setForm("forgot")}>
+            <button
+              className="text-danger bg-transparent"
+              onClick={() => setForm("forgot")}
+            >
               Forgot password?
             </button>
-            <button className="text-primary" onClick={() => setForm("signup")}>
+            <button
+              className="text-primary bg-transparent"
+              onClick={() => setForm("signup")}
+            >
               Don't have an account? Sign Up
             </button>
           </div>

@@ -191,7 +191,10 @@ function SignupForm(props) {
             Submit
           </Button>
           <div className="add-menus d-flex justify-content-between">
-            <button className="text-danger" onClick={() => setForm("login")}>
+            <button
+              className="text-danger bg-transparent"
+              onClick={() => setForm("login")}
+            >
               Already Have Account?
             </button>
           </div>
