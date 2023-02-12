@@ -1,5 +1,7 @@
 .pc-footer,.mobile-footer-menus-container{ 
-   box-shadow: 0 -5px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -2px 3px 1px rgba(0, 0, 0, 0.5);
+    border-top-right-radius: 20px ;
+    border-top-left-radius: 20px;
 }
 .workshop-page-container {
     width: 100vw;
@@ -38,15 +40,20 @@
 /* allbookings */
 
 .workshop-page-container .booking-wrapper {
-       box-shadow: 2px 6px 21px -2px rgba(0, 0, 0, 0.75);
+       box-shadow: 2px 6px 4px -2px rgba(0, 0, 0, 0.5) ,0px -3px 5px -2px rgba(0, 0, 0, 0.5);
        border-radius: 10px;
    }
 
- .workshop-page-container .bookings-container {
+ .all-bookings-page .bookings-container {
              display: grid;
-             gap: 10px;
+             gap: 15px;
              grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
-             justify-content: center;
+             justify-content: center;  
+
+             /* border:2px solid red;          */
+ }
+ .booking-wrapper:hover{
+    outline: 2px solid green;
  }
 
 .count-cards-container{
@@ -58,6 +65,7 @@
 }
 .booking-count-card-wrapper{
     cursor: pointer;
+    display: grid;
 }
 .booking-count-card-wrapper:hover p {
 font-weight: bold;
@@ -82,7 +90,8 @@ font-weight: bold;
 
  .workshop-page-container .filtered-bookings-container {
      display: grid;
-     gap: 10px;
+     gap: 20px;
      grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
      justify-content: center;
+     margin-bottom: 20px;
  }

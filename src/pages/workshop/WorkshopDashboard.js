@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { apiContext } from "../../App";
+
 import { ReLoad } from "../../components/workshop/ReLoad";
 
 import { workshopDataContext } from "./workshopLayout";
 function WorkshopDashboard() {
-  const { serverApi } = useContext(apiContext);
-  const { allBookings, setAllBookings } = useContext(workshopDataContext);
+  const { allBookings } = useContext(workshopDataContext);
   const statusCodeArray = ["00", "01", "02", "03", "04", "05", "06"];
   return (
     <>
@@ -42,7 +40,8 @@ function CountCard(props) {
 
   return (
     <>
-      <div
+      <button
+        type="button"
         style={{
           borderStyle: "solid",
           borderWidth: "2px",
@@ -52,14 +51,16 @@ function CountCard(props) {
         className="booking-count-card-wrapper "
         onClick={() => navigate(`allBookings/${code}`)}
       >
-        <span
-          style={{ backgroundColor: bookingStatusCodes[code].bgColor }}
+        <p
+          style={{
+            backgroundColor: bookingStatusCodes[code].bgColor,
+          }}
           className="booking-count text-center d-block"
         >
           {allBookings.filter((booking) => booking.statusCode === code).length}
-        </span>
+        </p>
         <p className=" text-center">{bookingStatusCodes[code].text}</p>
-      </div>
+      </button>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { Button, Rating, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { apiContext } from "../../App";
 import { userDataContext } from "./UserLayout ";
@@ -13,7 +14,7 @@ function UserNewBooking() {
     category: "",
     services: [],
   });
-  const [workshopSelected, setWorkshopSelected] = useState(false);
+
   const [filteredServices, setFilteredServices] = useState([]);
   const symbol = "->";
   return (
@@ -37,6 +38,7 @@ function UserNewBooking() {
   function WorkshopSelection() {
     const [selectedWorkshop, setSelectedWorkshop] = useState("");
     const { serverApi } = useContext(apiContext);
+    const navigate = useNavigate();
 
     const formik = useFormik({
       initialValues: { vehicleNo: "", vehicleModel: "" },
@@ -63,6 +65,7 @@ function UserNewBooking() {
       if (response.status === 200) {
         const data = await response.json();
         toast.success(data.message);
+        navigate("/user/allBookings");
       } else {
         const data = await response.json();
         toast.error(data.message);
@@ -90,7 +93,7 @@ function UserNewBooking() {
                   setSelectedWorkshop(name);
                 };
                 return (
-                  <div
+                  <button
                     key={i}
                     className={
                       selectedWorkshop === name
@@ -113,7 +116,7 @@ function UserNewBooking() {
                       value={parseInt(rating)}
                       readOnly
                     />
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -172,7 +175,7 @@ function UserNewBooking() {
           <div className="services-container">
             {filteredServices.map((service, i) => {
               return (
-                <div
+                <button
                   key={i}
                   className="service-wrapper d-flex flex-column align-items-center gap-0"
                   onClick={() => handleServiceClick(service.name)}
@@ -192,7 +195,7 @@ function UserNewBooking() {
                   <p style={{}} className="serviceName text-center py-2">
                     ₹ {service.charge}
                   </p>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -265,7 +268,7 @@ function ServiceCategoryMenu(props) {
   };
   return (
     <>
-      <div
+      <button
         className="service-category-wrapper d-flex flex-column align-items-center gap-0"
         onClick={() => handleServiceCategoryClick(serviceCategory.name)}
       >
@@ -275,7 +278,7 @@ function ServiceCategoryMenu(props) {
           alt={serviceCategory.name}
         />
         <p className="categoryName text-center py-2">{serviceCategory.name}</p>
-      </div>
+      </button>
     </>
   );
 }

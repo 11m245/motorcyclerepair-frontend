@@ -19,10 +19,10 @@ import { WorkshopStatusFilteredBookings } from "./pages/workshop/WorkshopStatusF
 export const apiContext = createContext();
 
 function App() {
-  // const serverUrl = "http://localhost:4000";
-  // const clientUrl = "http://localhost:3000";
-  const serverUrl = "https://motorcyclerepair-backend.vercel.app";
-  const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
+  const serverUrl = "http://localhost:4000";
+  const clientUrl = "http://localhost:3000";
+  // const serverUrl = "https://motorcyclerepair-backend.vercel.app";
+  // const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 720 ? true : false
   );
@@ -56,6 +56,7 @@ function App() {
               <Route path="allBookings" element={<UserAllBookings />} />
               <Route path="support" element={<UserSupport />} />
               {/* <Route path="profile" element={<UserProfile />} /> */}
+              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/workshop" element={<WorkshopLayout />}>
               <Route index element={<WorkshopDashboard />} />
@@ -67,6 +68,7 @@ function App() {
               />
               <Route path="support" element={<UserSupport />} />
               {/* <Route path="profile" element={<WorkshopProfile />} /> */}
+              <Route path="*" element={<NotFound />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
