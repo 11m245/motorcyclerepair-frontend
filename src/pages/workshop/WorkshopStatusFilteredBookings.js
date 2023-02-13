@@ -5,6 +5,7 @@ import { workshopDataContext } from "./workshopLayout";
 import PhoneForwardedIcon from "@mui/icons-material/PhoneForwarded";
 import { ReLoad } from "../../components/workshop/ReLoad";
 import { apiContext } from "../../App";
+import { toast } from "react-toastify";
 
 function WorkshopStatusFilteredBookings() {
   const { id } = useParams();
@@ -160,15 +161,26 @@ function StatusButton(props) {
     "06": { text: "Cancelled", bgColor: "#d9534f", path: "00" },
   };
 
-  function updateStatus(statusCode, bookingId) {
-    fetch(`${serverApi}/bookings/updateStatus/${statusCode}`, {
-      method: "POST",
-      headers: {
-        logintoken: localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookingId: bookingId }),
-    });
+  async function updateStatus(statusCode, bookingId) {
+    const updateStatusResponse = await fetch(
+      `${serverApi}/bookings/updateStatus/${statusCode}`,
+      {
+        method: "POST",
+        headers: {
+          logintoken: localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ bookingId: bookingId }),
+      }
+    );
+
+    if (updateStatusResponse.status === 200) {
+      const data = await updateStatusResponse.json();
+      toast.success(data.message);
+    } else {
+      const data = await updateStatusResponse.json();
+      toast.error(data.message);
+    }
   }
   return (
     <Button

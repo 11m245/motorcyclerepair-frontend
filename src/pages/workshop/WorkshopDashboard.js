@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { DoughnutChart } from "../../components/workshop/DoughnutChart";
 
 import { ReLoad } from "../../components/workshop/ReLoad";
 
@@ -7,6 +8,47 @@ import { workshopDataContext } from "./workshopLayout";
 function WorkshopDashboard() {
   const { allBookings } = useContext(workshopDataContext);
   const statusCodeArray = ["00", "01", "02", "03", "04", "05", "06"];
+
+  const doughnutChartData = {
+    labels: [
+      "Booked",
+      "Vehicle Picked",
+      "Under Inspection",
+      "Inprocess",
+      "Delivery Pending",
+      "Completed",
+      "Cancelled",
+    ],
+    datasets: [
+      {
+        label: "# of Bookings",
+        data: statusCodeArray.map(
+          (code) =>
+            allBookings.filter((booking) => booking.statusCode === code).length
+        ),
+
+        backgroundColor: [
+          "#000",
+          "#5bc0de",
+          "#f0ad4e",
+          "#9FA6B2",
+          "#0275d8",
+          "#5cb85c",
+          "#d9534f",
+        ],
+        borderColor: [
+          "#000",
+          "#5bc0de",
+          "#f0ad4e",
+          "#9FA6B2",
+          "#0275d8",
+          "#5cb85c",
+          "#d9534f",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   return (
     <>
       <div className="all-bookings-page">
@@ -17,6 +59,9 @@ function WorkshopDashboard() {
           {statusCodeArray.map((code) => (
             <CountCard code={code} />
           ))}
+        </div>
+        <div className="doughnut-chart">
+          <DoughnutChart data={doughnutChartData} />
         </div>
       </div>
     </>
@@ -64,4 +109,5 @@ function CountCard(props) {
     </>
   );
 }
+
 export { WorkshopDashboard };

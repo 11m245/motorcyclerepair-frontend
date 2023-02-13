@@ -95,3 +95,7 @@ font-weight: bold;
      justify-content: center;
      margin-bottom: 20px;
  }
+ .doughnut-chart{
+    max-width: 300px;
+    margin-inline: auto;
+ }
