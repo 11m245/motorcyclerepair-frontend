@@ -94,6 +94,7 @@ function UserNewBooking() {
                 };
                 return (
                   <button
+                    type="button"
                     key={i}
                     className={
                       selectedWorkshop === name
@@ -176,6 +177,7 @@ function UserNewBooking() {
             {filteredServices.map((service, i) => {
               return (
                 <button
+                  type="button"
                   key={i}
                   className="service-wrapper d-flex flex-column align-items-center gap-0"
                   onClick={() => handleServiceClick(service.name)}
@@ -269,6 +271,7 @@ function ServiceCategoryMenu(props) {
   return (
     <>
       <button
+        type="button"
         className="service-category-wrapper d-flex flex-column align-items-center gap-0"
         onClick={() => handleServiceCategoryClick(serviceCategory.name)}
       >
