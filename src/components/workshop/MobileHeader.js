@@ -93,10 +93,7 @@ function MobileHeader() {
               style={{ top: "60px", right: "0px", backgroundColor: "#fff" }}
               className="drop-log-out position-absolute drop-down-container"
             >
-              <p
-                className="drop-down-item"
-                onClick={() => navigate("/workshop/profile")}
-              >
+              <p className="drop-down-item" onClick={() => navigate("profile")}>
                 profile
               </p>
               <p className="drop-down-item" onClick={logout}>

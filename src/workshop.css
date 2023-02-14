@@ -99,3 +99,18 @@ font-weight: bold;
     max-width: 300px;
     margin-inline: auto;
  }
+
+ /* profile */
+
+ .view-profile-container {
+     max-width: 300px;
+     margin-inline: auto;
+     font-size: 16px;
+    /* border: 2px solid red; */
+ }
+
+ .profile-edit-form-container {
+     max-width: 300px;
+     margin-inline: auto;
+
+ }

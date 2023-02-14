@@ -16,6 +16,8 @@ import { WorkshopLayout } from "./pages/workshop/workshopLayout";
 import { WorkshopAllBookings } from "./pages/workshop/WorkshopAllBookings";
 import { WorkshopDashboard } from "./pages/workshop/WorkshopDashboard";
 import { WorkshopStatusFilteredBookings } from "./pages/workshop/WorkshopStatusFilteredBookings";
+import { UserProfile } from "./pages/user/UserProfile";
+import { WorkshopProfile } from "./pages/workshop/WorkshopProfile";
 export const apiContext = createContext();
 
 function App() {
@@ -55,19 +57,19 @@ function App() {
               <Route path="bookNew" element={<UserNewBooking />} />
               <Route path="allBookings" element={<UserAllBookings />} />
               <Route path="support" element={<UserSupport />} />
-              {/* <Route path="profile" element={<UserProfile />} /> */}
+              <Route path="profile" element={<UserProfile />} />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/workshop" element={<WorkshopLayout />}>
               <Route index element={<WorkshopDashboard />} />
-              <Route path="" element={<WorkshopDashboard />} />
+              {/* <Route path="" element={<WorkshopDashboard />} /> */}
               <Route path="allBookings" element={<WorkshopAllBookings />} />
               <Route
                 path="allBookings/:id"
                 element={<WorkshopStatusFilteredBookings />}
               />
               <Route path="support" element={<UserSupport />} />
-              {/* <Route path="profile" element={<WorkshopProfile />} /> */}
+              <Route path="profile" element={<WorkshopProfile />} />
               <Route path="*" element={<NotFound />} />
             </Route>
 

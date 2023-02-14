@@ -165,7 +165,7 @@ function StatusButton(props) {
     const updateStatusResponse = await fetch(
       `${serverApi}/bookings/updateStatus/${statusCode}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           logintoken: localStorage.getItem("token"),
           "Content-Type": "application/json",

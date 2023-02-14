@@ -124,7 +124,7 @@ function PcHeader() {
               {isMobile ? null : (
                 <p
                   className="drop-down-item"
-                  onClick={() => navigate("/user/profile")}
+                  onClick={() => navigate("profile")}
                 >
                   profile
                 </p>
