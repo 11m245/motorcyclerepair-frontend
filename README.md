@@ -7,6 +7,6 @@ Both Workshop, user module done, users can book service for their two wheelers a
 for Workshop \
 username  - workshop@gmail.com , password  - 12345678 \
 for users \
-username  - user@gmail.com , password  - 12345678 \
+username  - user@gmail.com , password  - 12345678 
 
 
