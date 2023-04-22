@@ -54,6 +54,7 @@
  }
  .booking-wrapper:hover{
     outline: 2px solid green;
+    background-color: rgb(201, 217, 252);
  }
 
 .count-cards-container{
