@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 function WorkshopStatusFilteredBookings() {
   const { id } = useParams();
   //   console.log("params id", id);
-  const { allBookings, allServices } = useContext(workshopDataContext);
+  const { allBookings } = useContext(workshopDataContext);
   const bookingStatusCodes = {
     "00": { text: "Booked", color: "#000" },
     "01": { text: "Vehicle picked", color: "#5bc0de" },
@@ -39,7 +39,6 @@ function WorkshopStatusFilteredBookings() {
 
 function Booking(props) {
   const { booking } = props;
-  const { allBookings, allServices } = useContext(workshopDataContext);
 
   const bookingStatusCodes = {
     "00": { text: "Booked", color: "#000" },
@@ -50,11 +49,12 @@ function Booking(props) {
     "05": { text: "Delivered-complete", color: "#5cb85c" },
     "06": { text: "Cancelled", color: "#d9534f" },
   };
+
   const {
     _id: bookingId,
-    category: serviceCategory,
-    services,
-    description,
+    invoiceAmount,
+    selectedCartItems,
+    comments,
     vehicleModel,
     vehicleNo,
     updatedAt,
@@ -62,23 +62,6 @@ function Booking(props) {
     user,
   } = booking;
 
-  const pricedServices = services.map((service) => {
-    return { name: service, price: getServicePrice(service) };
-  });
-
-  const total = pricedServices.reduce(
-    (acc, cobj) => acc + parseInt(cobj.price),
-    0
-  );
-  // console.log("pricedServices", pricedServices);
-  function getServicePrice(serviceName) {
-    const pricedService = allServices.find(
-      (service) => service.name === serviceName
-    );
-    return pricedService.charge;
-  }
-
-  const { name: userName, mobile: userMobile, address: userAddress } = user[0];
   return (
     <div className="booking-wrapper p-2">
       <div className="section1 section">
@@ -99,24 +82,44 @@ function Booking(props) {
       </div>
       <div className="section2 section">
         <div className="services">
-          <p className="fw-bold">
-            <span>{serviceCategory}</span> {"->"}{" "}
-            <span>{services.join(",")}</span>
-          </p>
-          <p>description</p>
-          <p>{description}</p>
+          <table className="table table-sm table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Charge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {selectedCartItems.map((service) => {
+                const { name, qty, charge } = service;
+                return (
+                  <tr>
+                    <td>{name}</td>
+                    <td className="text-center">{qty}</td>
+                    <td className="text-center">Rs. {charge}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
         <div className="amount d-flex flex-column align-items-center ">
-          <p>Total</p>
-          <p>₹ {total}</p>
+          <p>invoiceAmount</p>
+          <p>₹ {invoiceAmount}</p>
         </div>
       </div>
+      <div className="section" style={{ borderBottom: "2px solid #1975d2" }}>
+        <p>
+          comments : <b>{comments}</b>
+        </p>
+      </div>
 
-      <p className="text-center fw-bold">{userName}</p>
-      <p className="text-center">{userAddress}</p>
+      <p className="text-center fw-bold">{user.name}</p>
+      <p className="text-center">{user.address}</p>
       <div className="mobile-wrapper d-flex align-items-center justify-content-center">
-        <p className="text-center">{userMobile}</p>
-        <a href={`tel:${userMobile}`}>
+        <p className="text-center">{user.mobile}</p>
+        <a href={`tel:${user.mobile}`}>
           <IconButton color="primary" aria-label="add to shopping cart">
             <PhoneForwardedIcon />
           </IconButton>
@@ -149,7 +152,7 @@ function StatusUpdateButtons({ booking }) {
 }
 
 function StatusButton(props) {
-  const { statusCode, index, bookingId } = props;
+  const { statusCode, bookingId } = props;
   const { serverApi } = useContext(apiContext);
   const bookingStatusCodes = {
     "00": { text: "Booked", bgColor: "#000", path: "00" },

@@ -1,5 +1,10 @@
-import { RepeatOneSharp } from "@mui/icons-material";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { Outlet } from "react-router-dom";
 import { apiContext } from "../../App";
 import { MobileFooter } from "../../components/user/MobileFooter";
@@ -7,22 +12,27 @@ import { MobileHeader } from "../../components/user/MobileHeader";
 import { PcFooter } from "../../components/user/PcFooter";
 import { PcHeader } from "../../components/user/PcHeader.js";
 import "../../user.css";
+import { cartReducer } from "./CartReducer";
 
 export const userDataContext = createContext();
 function UserLayout() {
   const { serverApi, isMobile } = useContext(apiContext);
-  const nnCtx = useContext(apiContext);
 
   const [allServiceCategories, setAllServiceCategories] = useState([]);
   const [allServices, setAllServices] = useState([]);
   const [workshops, setWorkshops] = useState([]);
+  const [cartServices, cartDispatch] = useReducer(cartReducer, []);
+  const [bookingDetails, setBookingDetails] = useState({});
 
   const dataContextObj = {
     allServices,
     setAllServices,
-    allServiceCategories,
-    setAllServiceCategories,
     workshops,
+    allServiceCategories,
+    cartServices,
+    cartDispatch,
+    bookingDetails,
+    setBookingDetails,
   };
   // console.log("data", dataContextObj);
 
@@ -71,6 +81,7 @@ function UserLayout() {
     if (response.status === 200) {
       const data = await response.json();
       setWorkshops(data.payload);
+      // console.log("workshop fetch", data.payload);
     } else {
       console.log("workshops not fetched");
     }

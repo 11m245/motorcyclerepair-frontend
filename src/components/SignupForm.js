@@ -52,9 +52,9 @@ function SignupForm(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
-    console.log("signup response ", response);
+    // console.log("signup response ", response);
     const data = await response.json();
-    console.log("signup response data", data);
+    // console.log("signup response data", data);
     data.message ===
     "User Created, use the Activation link Sent on mail for Activation"
       ? toast.success(data.message)

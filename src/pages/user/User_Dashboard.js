@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import ImageSliderCarousel from "../../components/user/ImageSlider";
 
-import { userDataContext } from "./UserLayout ";
+// import { userDataContext } from "./UserLayout ";
 
 function UserDashboard() {
-  const userData = useContext(userDataContext);
-  console.log("data ctx", userData);
+  // const userData = useContext(userDataContext);
+  // console.log("data ctx", userData);
   const images = [
     {
       name: "image1",

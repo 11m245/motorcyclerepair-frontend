@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { apiContext } from "../../App";
-import { userDataContext } from "./UserLayout ";
+
 import PhoneForwardedIcon from "@mui/icons-material/PhoneForwarded";
 import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
 
 function UserAllBookings() {
   const { serverApi } = useContext(apiContext);
@@ -46,7 +45,7 @@ function UserAllBookings() {
 
 function Booking(props) {
   const { booking } = props;
-  const { allServices } = useContext(userDataContext);
+
   const bookingStatusCodes = {
     "00": { text: "Booked", color: "#000" },
     "01": { text: "Vehicle picked by Workshop", color: "#5bc0de" },
@@ -58,37 +57,16 @@ function Booking(props) {
   };
   const {
     _id: bookingId,
-    category: serviceCategory,
-    services,
-    description,
+    selectedCartItems,
     vehicleModel,
     vehicleNo,
+    comments,
     updatedAt,
     statusCode,
     workshop,
+    invoiceAmount,
   } = booking;
 
-  const pricedServices = services.map((service) => {
-    return { name: service, price: getServicePrice(service) };
-  });
-
-  const total = pricedServices.reduce(
-    (acc, cobj) => acc + parseInt(cobj.price),
-    0
-  );
-  // console.log("pricedServices", pricedServices);
-  function getServicePrice(serviceName) {
-    const pricedService = allServices.find(
-      (service) => service.name === serviceName
-    );
-    return pricedService.charge;
-  }
-
-  const {
-    name: workshopName,
-    mobile: workshopMobile,
-    address: workshopAddress,
-  } = workshop[0];
   return (
     <div className="booking-wrapper p-2">
       <div className="section1 section">
@@ -109,28 +87,50 @@ function Booking(props) {
       </div>
       <div className="section2 section">
         <div className="services">
-          <p className="fw-bold">
-            <span>{serviceCategory}</span> {"->"}{" "}
-            <span>{services.join(",")}</span>
-          </p>
-          <p>description</p>
-          <p>{description}</p>
+          <table className="table table-sm table-borderless">
+            <thead>
+              <tr>
+                <th scope="col">Service</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Charge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {selectedCartItems.map((service) => {
+                const { name, qty, charge } = service;
+                return (
+                  <tr key={service._id}>
+                    <td>{name}</td>
+                    <td className="text-center">{qty}</td>
+                    <td className="text-center">Rs. {charge}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
         <div className="amount d-flex flex-column align-items-center ">
-          <p>Total</p>
-          <p>₹ {total}</p>
+          <p>invoiceAmount</p>
+          <p>₹ {invoiceAmount}</p>
         </div>
       </div>
+      <div className="section" style={{ borderBottom: "2px solid #1975d2" }}>
+        <p>
+          comments : <b>{comments}</b>
+        </p>
+      </div>
 
-      <p className="text-center fw-bold">{workshopName}</p>
-      <p className="text-center">{workshopAddress}</p>
-      <div className="mobile-wrapper d-flex align-items-center justify-content-center">
-        <p className="text-center">{workshopMobile}</p>
-        <a href={`tel:${workshopMobile}`}>
-          <IconButton color="primary" aria-label="add to shopping cart">
-            <PhoneForwardedIcon />
-          </IconButton>
-        </a>
+      <div className="section3 section d-flex flex-column">
+        <p className="text-center fw-bold">{workshop.name}</p>
+        <p className="text-center">{workshop.address}</p>
+        <div className="mobile-wrapper d-flex align-items-center justify-content-center">
+          <p className="text-center">{workshop.mobile}</p>
+          <a href={`tel:${workshop.mobile}`}>
+            <IconButton color="primary" aria-label="add to shopping cart">
+              <PhoneForwardedIcon />
+            </IconButton>
+          </a>
+        </div>
       </div>
       {/* serviceslist */}
     </div>

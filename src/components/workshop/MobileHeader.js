@@ -21,7 +21,7 @@ function MobileHeader() {
         "Content-Type": "application/json",
       },
     });
-    console.log("expire token resp", response);
+    // console.log("expire token resp", response);
     localStorage.removeItem("token");
     navigate("/");
   }

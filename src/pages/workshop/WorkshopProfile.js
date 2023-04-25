@@ -71,7 +71,7 @@ function ViewWorkshopProfile({ workshopProfile }) {
             wordWrap: "break-word",
           }}
         >
-          Pincodes : {workshopProfile?.pins.join(",")}
+          Pincodes : {workshopProfile?.pins?.join(", ")}
         </p>
       </div>
     </div>

@@ -57,7 +57,7 @@ function WorkshopDashboard() {
         <h6 className="text-center">Total Orders : {allBookings.length}</h6>
         <div className="count-cards-container p-3">
           {statusCodeArray.map((code) => (
-            <CountCard code={code} />
+            <CountCard key={code} code={code} />
           ))}
         </div>
         <div className="doughnut-chart">

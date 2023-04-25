@@ -18,13 +18,15 @@ import { WorkshopDashboard } from "./pages/workshop/WorkshopDashboard";
 import { WorkshopStatusFilteredBookings } from "./pages/workshop/WorkshopStatusFilteredBookings";
 import { UserProfile } from "./pages/user/UserProfile";
 import { WorkshopProfile } from "./pages/workshop/WorkshopProfile";
+import { CartPage } from "./pages/user/CartPage";
+import { WorkshopSelection } from "./pages/user/WorkshopSelection";
 export const apiContext = createContext();
 
 function App() {
-  // const serverUrl = "http://localhost:4000";
-  // const clientUrl = "http://localhost:3000";
-  const serverUrl = "https://motorcyclerepair-backend.vercel.app";
-  const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
+  const serverUrl = "http://localhost:4000";
+  const clientUrl = "http://localhost:3000";
+  // const serverUrl = "https://motorcyclerepair-backend.vercel.app";
+  // const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 720 ? true : false
   );
@@ -58,6 +60,11 @@ function App() {
               <Route path="allBookings" element={<UserAllBookings />} />
               <Route path="support" element={<UserSupport />} />
               <Route path="profile" element={<UserProfile />} />
+              <Route path="cart" element={<CartPage />} />
+              <Route
+                path="cart/workshop-selection"
+                element={<WorkshopSelection />}
+              />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/workshop" element={<WorkshopLayout />}>

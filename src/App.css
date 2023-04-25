@@ -65,7 +65,73 @@ border-radius: 10px;
 border: none;
 }
 
+
+
+.service-wrapper{
+  max-width: "200px";
+}
+
+
+/* cart item page */
+.cart-page{
+width: 100%;
+}
+.cart-items-container { 
+  padding: 10px; 
+  display: grid;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 260px));
+  justify-content: center;
+  gap: 10px;
+  /* border: 2px solid green; */
+ 
+}
+
+.cart-items-container::-webkit-scrollbar {
+  display: none;
+}
+.cart-item-wrapper{ 
+ 
+  height: 150px;
+  /* border: 2px solid red; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(50px, 120px));
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 20px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  /* margin-inline: 10px; */
+}
+.cart-item-wrapper > img{
+  width: 120px;  
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.name-quantity-wrapper{  
+/* padding-inline: 10px; */
+}
+.qty-btns{
+  /* border: 5px solid brown; */
+  /* width: 100%; */
+}
+
+
+.booking-wrapper{
+  border: 2px solid grey;
+}
+
+.service-category-container{
+  width: 100%;
+}
+
+
 /*media queries*/
+
+
 
 @media screen and (max-width:576px){
   .home-image-container{

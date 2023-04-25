@@ -42,9 +42,9 @@ function EditUserProfile({ userProfile }) {
       },
       body: JSON.stringify(values),
     });
-    console.log("profile update response ", response);
+    // console.log("profile update response ", response);
     const data = await response.json();
-    console.log("profile update response data", data);
+    // console.log("profile update response data", data);
     data.message === "User Updated, use the New credentials for login"
       ? toast.success(data.message)
       : toast.error(data.message);

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
 
@@ -30,7 +30,7 @@ function PcHeader() {
         "Content-Type": "application/json",
       },
     });
-    console.log("expire token resp", response);
+    // console.log("expire token resp", response);
     localStorage.removeItem("token");
     navigate("/");
   }

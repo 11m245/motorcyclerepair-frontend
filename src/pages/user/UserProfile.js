@@ -6,6 +6,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 import { EditUserProfile } from "../user/EditUserProfile.js";
 
+import { toast } from "react-toastify";
+
 function UserProfile() {
   const { serverApi } = useContext(apiContext);
   const [userProfile, setUserProfile] = useState(null);
@@ -20,11 +22,13 @@ function UserProfile() {
     });
     if (response.status === 200) {
       const data = await response.json();
-      console.log(data.message);
+      // console.log(data.message);
       setUserProfile(data.payload);
+      // toast.success(data.message);
     } else {
       const data = await response.json();
-      console.log(data.message);
+      toast.error(data.message);
+      // console.log(data.message);
     }
   }
 

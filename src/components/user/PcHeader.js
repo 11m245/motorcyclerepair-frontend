@@ -1,15 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
-
+import BuildCircleIcon from "@mui/icons-material/BuildCircle";
+import Badge from "@mui/material/Badge";
 import { useContext, useEffect, useState } from "react";
 
 import { apiContext } from "../../App";
 import { Button } from "@mui/material";
+import { userDataContext } from "../../pages/user/UserLayout ";
+import { toast } from "react-toastify";
 
 function PcHeader() {
   const { serverApi, isMobile } = useContext(apiContext);
+  const { cartServices } = useContext(userDataContext);
   const [showDropLog, setShowDropLog] = useState(false);
   const [activeMenu, setActiveMenu] = useState("Home");
   const [user, setUser] = useState(null);
@@ -31,9 +35,14 @@ function PcHeader() {
         "Content-Type": "application/json",
       },
     });
-    console.log("expire token resp", response);
-    localStorage.removeItem("token");
-    navigate("/");
+    // console.log("expire token resp", response);
+    if (response.status === 200) {
+      localStorage.removeItem("token");
+      navigate("/");
+    } else {
+      const resData = await response.json();
+      toast.error(resData.message);
+    }
   }
 
   async function fetchUserInfo() {
@@ -79,7 +88,7 @@ function PcHeader() {
           </h6>
         </div>
 
-        <div className="nav-items-container d-flex gap-2">
+        <div className="nav-items-container d-flex gap-2 align-items-center">
           {navItems.map((item, index) => {
             return (
               <Link style={{ color: "#fff" }} key={index} to={item.path}>
@@ -96,6 +105,22 @@ function PcHeader() {
               </Link>
             );
           })}
+
+          <Badge
+            badgeContent={cartServices.length}
+            color="error"
+            onClick={() => navigate("cart")}
+          >
+            <BuildCircleIcon sx={{ color: "white", fontSize: "32px" }} />
+          </Badge>
+          {/* <IconButton
+            sx={{ color: "white" }}
+            aria-label="cart"
+            size="large"
+            onClick={() => navigate("cart")}
+          >
+            <BuildCircleIcon />
+          </IconButton> */}
         </div>
 
         <div
