@@ -24,9 +24,9 @@ export const apiContext = createContext();
 
 function App() {
   // const serverUrl = "http://localhost:4000";
-  const clientUrl = "http://localhost:3000";
+  // const clientUrl = "http://localhost:3000";
   const serverUrl = "https://motorcyclerepair-backend.vercel.app";
-  // const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
+  const clientUrl = "https://whimsical-nasturtium-77b914.netlify.app";
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 720 ? true : false
   );
