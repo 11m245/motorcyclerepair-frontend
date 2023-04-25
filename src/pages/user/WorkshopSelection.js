@@ -8,7 +8,7 @@ import { apiContext } from "../../App";
 import { toast } from "react-toastify";
 
 function WorkshopSelection() {
-  const { serverApi } = useContext(apiContext);
+  const { serverApi, isMobile } = useContext(apiContext);
   const [selectedWorkshop, setSelectedWorkshop] = useState("");
   const { workshops, bookingDetails, setBookingDetails, cartDispatch } =
     useContext(userDataContext);
@@ -93,7 +93,7 @@ function WorkshopSelection() {
           {selectedWorkshop ? (
             <form
               onSubmit={formik.handleSubmit}
-              style={{ maxWidth: "500px" }}
+              style={isMobile ? { maxWidth: "350px" } : { maxWidth: "500px" }}
               className="mx-auto mt-4 d-flex flex-column gap-2"
             >
               <TextField
