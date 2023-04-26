@@ -44,6 +44,9 @@
        border-radius: 10px;
    }
 
+   .selectedShop{
+    border: 5px solid blue;
+   }
  .all-bookings-page .bookings-container {
              display: grid;
              gap: 15px;
