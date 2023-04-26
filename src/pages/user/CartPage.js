@@ -56,6 +56,7 @@ function CartItems({ total }) {
           Total : <span style={{ color: "green" }}>Rs. {total}</span>
         </h5>
         <Button
+          color="success"
           variant="contained"
           endIcon={<SendIcon />}
           onClick={() => handleCartSubmission()}

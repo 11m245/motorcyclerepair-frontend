@@ -21,7 +21,7 @@ function EditWorkshopProfile({ workshopProfile }) {
       .required()
       .oneOf([yup.ref("password"), null], "Passwords must match"),
     address: yup.string().min(10).required(),
-    pins: yup.string().min(6),
+    pins: yup.string().min(6).required(),
   };
   const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
     useFormik({
@@ -102,6 +102,7 @@ function EditWorkshopProfile({ workshopProfile }) {
             helperText={
               touched.password && errors.password ? errors.password : null
             }
+            required
           />
           <TextField
             id="cpassword"

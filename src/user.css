@@ -102,7 +102,7 @@ justify-content: center;
 .services-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 100px));
+    grid-template-columns: repeat(auto-fit, minmax(60px, 120px));
     justify-content: center;
    gap: 25px;
    
