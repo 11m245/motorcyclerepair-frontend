@@ -36,14 +36,14 @@ username - user@gmail.com , password - 12345678
 
 - **Bookings**
 
-  - You can view all of user bookings by clicking the bookings button on the navigation
+  - User can view all of his bookings by clicking the bookings button on the navigation
 
 - **Workshop Service Processing Steps**
 
   - After Login workshop will be landed on the homepage which will show the dahsboard consisting of Status wise count of all bookings.
   - Clicking on any count will show coressponding status bookings
   - On each booking the new Status Buttons are available, by clicking this new status workshop can update the booking's stage
-  - initially the new booking will be in 00-Booked Status then status flow will be like
+  - initially the new booking will be in 00-Booked Status then status flow will be like \
     00-Booked -> 01-Vehicle Picked -> 02-Under Inspection -> 03-In Process -> 04-Delivery Pending -> 05-Completed -> 06-Cancelled
 
 - **Update Profile**
