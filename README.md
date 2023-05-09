@@ -19,10 +19,10 @@ username - user@gmail.com , password - 12345678
 
   - Login to your account with credentials
 
-- Forgot Password
+** - Forgot Password **
 
-  - You can click on the forgot Password button on login page, and navigate to the forgot password page, then after verifying your email id, a reset password link will be sent to your email id, which exit in your Account details
-  - Using this link you can change the password from client
+- You can click on the forgot Password button on login page, and navigate to the forgot password page, then after verifying your email id, a reset password link will be sent to your email id, which exit in your Account details
+- Using this link you can change the password from client
 
 - User Service Booking Steps
 
