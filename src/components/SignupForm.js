@@ -6,12 +6,14 @@ import {
   TextField,
 } from "@mui/material";
 import { useFormik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as yup from "yup";
 import { apiContext } from "../App";
 import { toast } from "react-toastify";
+import { CustomLoadingButton } from "./customLoadingButton";
 
 function SignupForm(props) {
+  const [isLoading, setIsLoading] = useState(false);
   const { serverApi } = useContext(apiContext);
   const { setForm } = props;
   const initialValidationSchema = {
@@ -47,6 +49,7 @@ function SignupForm(props) {
     });
 
   async function signup(values) {
+    setIsLoading(true);
     const response = await fetch(`${serverApi}/user/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,6 +58,7 @@ function SignupForm(props) {
     // console.log("signup response ", response);
     const data = await response.json();
     // console.log("signup response data", data);
+    setIsLoading(false);
     data.message ===
     "User Created, use the Activation link Sent on mail for Activation"
       ? toast.success(data.message)
@@ -187,9 +191,16 @@ function SignupForm(props) {
               helperText={touched.pin && errors.pin ? errors.pin : null}
             />
           )}
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
+
+          <CustomLoadingButton
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            buttonComponent={
+              <Button type="submit" variant="contained">
+                Signup
+              </Button>
+            }
+          />
           <div className="add-menus d-flex justify-content-between">
             <button
               className="text-danger bg-transparent"
