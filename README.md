@@ -13,7 +13,9 @@ username - user@gmail.com , password - 12345678
 
 - **Signup**
 
-  - Signup form will ask user Details, on valid input fields signup is processed 02. After Signup activate your Account by visiting the link sent to your email which is used at the time of signup 03. After email verification you are good to go to the login process.
+  - Signup form will ask user Details, on valid input fields signup is processed.
+  - After Signup activate your Account by visiting the link sent to your email which is used at the time of signup
+  - After email verification you are good to go to the login process.
 
 - **Login**
 

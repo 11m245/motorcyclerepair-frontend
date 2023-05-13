@@ -6,8 +6,10 @@ import { Button, Rating, TextField } from "@mui/material";
 import { useState } from "react";
 import { apiContext } from "../../App";
 import { toast } from "react-toastify";
+import { CustomLoadingButton } from "../../components/customLoadingButton";
 
 function WorkshopSelection() {
+  const [isLoading, setIsLoading] = useState(false);
   const { serverApi, isMobile } = useContext(apiContext);
   const [selectedWorkshop, setSelectedWorkshop] = useState("");
   const { workshops, bookingDetails, setBookingDetails, cartDispatch } =
@@ -20,6 +22,7 @@ function WorkshopSelection() {
   });
 
   const placeServiceRequest = async (values) => {
+    setIsLoading(true);
     const response = await fetch(`${serverApi}/bookings/new`, {
       method: "POST",
       headers: {
@@ -35,11 +38,13 @@ function WorkshopSelection() {
     });
 
     if (response.status === 200) {
+      setIsLoading(false);
       const data = await response.json();
       toast.success(data.message);
       cartDispatch({ type: "CLEAR" });
       navigate("/user/allBookings");
     } else {
+      setIsLoading(false);
       const data = await response.json();
       toast.error(data.message);
     }
@@ -125,9 +130,16 @@ function WorkshopSelection() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              <Button type="submit" variant="contained">
-                Book Now
-              </Button>
+
+              <CustomLoadingButton
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                buttonComponent={
+                  <Button type="submit" variant="contained">
+                    Book Now
+                  </Button>
+                }
+              />
             </form>
           ) : null}
         </div>

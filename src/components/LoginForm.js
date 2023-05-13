@@ -1,12 +1,14 @@
 import { Button, TextField } from "@mui/material";
 import { useFormik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { apiContext } from "../App";
+import { CustomLoadingButton } from "./customLoadingButton";
 
 function LoginForm(props) {
+  const [isLoading, setIsLoading] = useState(false);
   const { setForm } = props;
   const { serverApi } = useContext(apiContext);
   const navigate = useNavigate();
@@ -22,17 +24,20 @@ function LoginForm(props) {
     });
 
   const login = async (values) => {
+    setIsLoading(true);
     const response = await fetch(`${serverApi}/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
     if (response.status === 200) {
+      setIsLoading(false);
       const data = await response.json();
       localStorage.setItem("token", data.token);
       toast.success(data.message);
       data.role === "workshop" ? navigate("/workshop") : navigate("/user");
     } else {
+      setIsLoading(false);
       const data = await response.json();
       toast.error(data.message);
     }
@@ -66,9 +71,16 @@ function LoginForm(props) {
               touched.password && errors.password ? errors.password : null
             }
           />
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
+
+          <CustomLoadingButton
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            buttonComponent={
+              <Button type="submit" variant="contained">
+                Login
+              </Button>
+            }
+          />
           <div className="add-menus d-flex justify-content-between">
             <button
               className="text-danger bg-transparent"
