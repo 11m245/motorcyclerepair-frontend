@@ -36,12 +36,11 @@ export function cartReducer(cartItems, action) {
       //   console.log("found", foundProduct);
       if (foundProduct1?.qty >= 2) {
         crproduct1.qty = crproduct1.qty - 1;
+        return [...filterProducts1, crproduct1].sort((a, b) => a.name - b.name);
       } else {
-        crproduct1.qty = 1;
         return [...filterProducts1];
       }
 
-      return [...filterProducts1, crproduct1].sort((a, b) => a.name - b.name);
     case "GET CART":
       return cartItems.sort((a, b) => a.name - b.name);
     case "CLEAR":

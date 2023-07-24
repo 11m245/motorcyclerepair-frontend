@@ -21,8 +21,8 @@ function UserLayout() {
   const [allServiceCategories, setAllServiceCategories] = useState([]);
   const [allServices, setAllServices] = useState([]);
   const [workshops, setWorkshops] = useState([]);
-  const [cartServices, cartDispatch] = useReducer(cartReducer, []);
   const [bookingDetails, setBookingDetails] = useState({});
+  const [cartServices, cartDispatch] = useReducer(cartReducer, []);
 
   const dataContextObj = {
     allServices,
